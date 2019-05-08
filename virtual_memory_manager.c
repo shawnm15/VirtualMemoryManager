@@ -32,7 +32,6 @@ int spots = 0;
 
 
 void addTLB(unsigned int page_number,unsigned int frame_number){
-    
 	int i; 
     	for(i=0; i<spots; i++){
         	if(tlb[i][0] == page_number)
@@ -53,7 +52,6 @@ void addTLB(unsigned int page_number,unsigned int frame_number){
         	}
         	        
     	}else{
-
 		if(spots<TLB_LENGTH){ 
             		tlb[spots][0] = page_number;    
             		tlb[spots][1] = frame_number;
@@ -65,7 +63,6 @@ void addTLB(unsigned int page_number,unsigned int frame_number){
             		tlb[spots-1][0]= page_number;  
             		tlb[spots-1][1]= frame_number;
         	}
-        	
     	}
     	if(TLB_LENGTH>spots){                   
         	spots++;
@@ -104,8 +101,6 @@ void searchTLB(unsigned int virtual_address){
             		frame_number = tlb[i][1];       
         	}
     	}
-  
-
 	if(frame_number==-1){
         	int i;  
         	for(i=0; i<next_page; i++){
@@ -138,8 +133,7 @@ int main(int argc, char *argv[])
     	
     	if (mmapfile_fd<0)
 		printf("Error in opening BACKING_STORE.bin");
-
-
+	
     	if (fptr1 == NULL) {
         	printf("Error in opening addresses.txt\n");
         	return -1;
@@ -148,8 +142,8 @@ int main(int argc, char *argv[])
     	while (fgets(input_buffer, 10, fptr1) != NULL) {
         	virtual_address = atoi(input_buffer);
         	searchTLB(virtual_address);
-
     	}
+	
 	printf("Number of Translated Addresses = 1000\n");
     	printf("Page Faults = %d\n", faults);
     	printf("TLB Hits = %d\n", hits);
@@ -158,5 +152,3 @@ int main(int argc, char *argv[])
 	close(mmapfile_fd);
     	return 0;
 }
-
-
